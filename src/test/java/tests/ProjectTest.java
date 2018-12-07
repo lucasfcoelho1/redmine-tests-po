@@ -22,7 +22,7 @@ import po.*;
  *
  * @author coelho
  */
-public class RedminePOTest {
+public class ProjectTest {
     
     private WebDriver driver;
 
@@ -34,7 +34,7 @@ public class RedminePOTest {
     @Before
     public void setUp() {
         ChromeOptions chromeOptions = new ChromeOptions();
-        //chromeOptions.addArguments("headless");
+        chromeOptions.addArguments("headless");
         chromeOptions.addArguments("window-size=1200x600");
         chromeOptions.addArguments("lang=en-US");
         chromeOptions.addArguments("start-maximized");
@@ -47,55 +47,6 @@ public class RedminePOTest {
     @After
     public void tearDown() {
         driver.close();
-    }
-
-    @Test
-    public void testSuccefulLogin() {
-        String login = "user123";   
-        String password = "pass123";  
-
-        HomePage home = new HomePage(driver);
-
-        HomePage homePage;
-        homePage = (HomePage) home.getMenu().goToLoginPage().login(login, password);
-
-        assertEquals(homePage.getMenu().loggedAs(), login);
-    }
-
-    @Test 
-    public void testInvalidLogin() {
-        String login = "wrongLogin";   
-        String senha = "wrongPassword";  
-
-        HomePage home = new HomePage(driver);
-
-        LoginPage loginPage;
-        loginPage = (LoginPage) home.getMenu().goToLoginPage().login(login, senha);
-
-        assertTrue(loginPage.loginProblem());
-    }
-
-    @Test
-    public void testCreateAccount() {
-        String user = "testUsertest";
-        String password = "testPassword";
-        String passwordConfirmation = "testPassword";
-        String name = "testName";
-        String lastName = "testLastName";
-        String email = "testemail@testemail.com";
-        String language = "Portuguese/Brasil (Português/Brasil)";
-
-        HomePage home = new HomePage(driver);
-
-        MyAccountPage myAccount = 
-                (MyAccountPage) home
-                        .getMenu()
-                        .goToSignInPage()
-                        .signIn(user, password, passwordConfirmation, name, lastName, email, language);
-
-        assertEquals(myAccount.getMenu().loggedAs(), user);
-
-        assertTrue(myAccount.removeAccount().confirmRemoveAccount().removeAccount());
     }
 
     @Test
